@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Game.css';
 
 export class Game extends Component {
 	constructor() {
@@ -11,7 +10,7 @@ export class Game extends Component {
 	}
 
 	randomNumber() {
-		let rand = Math.floor(Math.random() * 10);
+		let rand = Math.floor(Math.random() * 10 + 1);
 		this.setState({ num: rand });
 	}
 
@@ -19,15 +18,11 @@ export class Game extends Component {
 		return (
 			<div>
 				<h1>Number is {this.state.num}</h1>
-				<h2 className={this.state.num === 7 ? 'winner-header' : 'loser-header'}>
-					You win!!!
-				</h2>
-				<button
-					className={this.state.num === 7 ? 'winner-btn' : 'loser-btn'}
-					onClick={this.randomNumber}
-				>
-					Click me!
-				</button>
+				{this.state.num === 7 ? (
+					<h2>You win!!!</h2>
+				) : (
+					<button onClick={this.randomNumber}>Click me!</button>
+				)}
 			</div>
 		);
 	}
