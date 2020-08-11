@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Die from './Die';
+import './RollDice.css';
 
 export default class RollDice extends Component {
 	static defaultProps = { side: [ 'one', 'two', 'three', 'four', 'five', 'six' ] };
@@ -13,18 +14,20 @@ export default class RollDice extends Component {
 
 	roll() {
 		let randArray = [];
-		for (let i = 0; i < 2; i++) {
-			randArray.push(Math.floor(Math.random() * 6));
+		for (let i = 0; i < this.state.dice.length; i++) {
+			randArray.push(Math.floor(Math.random() * this.props.side.length));
 		}
 
 		this.setState({ dice: randArray });
 	}
 	render() {
 		return (
-			<div>
+			<div className="RollDice">
 				<Die side={this.props.side[this.state.dice[0]]} />
 				<Die side={this.props.side[this.state.dice[1]]} />
-				<button onClick={this.roll}>Roll</button>
+				<button className="RollDice__btn" onClick={this.roll}>
+					Roll Dice!
+				</button>
 			</div>
 		);
 	}
