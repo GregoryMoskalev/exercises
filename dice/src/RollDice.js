@@ -23,8 +23,10 @@ export default class RollDice extends Component {
 	render() {
 		return (
 			<div className="RollDice">
-				<Die side={this.props.side[this.state.dice[0]]} />
-				<Die side={this.props.side[this.state.dice[1]]} />
+				<div className="RollDice__container">
+					<Die side={this.props.side[this.state.dice[0]]} />
+					<Die side={this.props.side[this.state.dice[1]]} />
+				</div>
 				<button className="RollDice__btn" onClick={this.roll}>
 					Roll Dice!
 				</button>

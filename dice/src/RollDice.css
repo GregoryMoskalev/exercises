@@ -1,8 +1,27 @@
-.RollDice__btn {
-	color: #fff;
-	background-color: slateblue;
-	height: 5rem;
-	width: 20rem;
-}
 .RollDice {
+	display: flex;
+	flex-flow: column nowrap;
+	min-height: 100vh;
+}
+
+.RollDice__container {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.RollDice__btn {
+	align-self: center;
+	color: #fff;
+	background-color: black;
+	height: 5rem;
+	width: 15rem;
+	padding: 1.5rem;
+	border: 0px;
+	border-radius: 10px;
+	margin-top: 3rem;
+}
+
+.RollDice__btn:hover {
+	background-color: darkslateblue;
 }
