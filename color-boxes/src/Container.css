@@ -1,0 +1,7 @@
+.Container {
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+}
+.Container__box-container {
+	height: 10vh;
+}
