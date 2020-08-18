@@ -50,9 +50,11 @@ class Board extends Component {
 		// TODO: create array-of-arrays of true/false values
 		for (let y = 0; y < this.props.nrows; y++) {
 			let row = [];
+
 			for (let x = 0; x < this.props.ncols; x++) {
 				row.push(Math.random() > this.props.chanceLightStartsOn);
 			}
+
 			board.push(row);
 		}
 		return board;
@@ -88,9 +90,20 @@ class Board extends Component {
 		// TODO
 		// make table board
 		// TODO
+
+		let generateTable = [];
+		for (let y = 0; y < this.props.nrows; y++) {
+			let row = [];
+
+			for (let x = 0; x < this.props.ncols; x++) {
+				row.push(<Cell isLit={this.state.board[y][x]} />);
+			}
+			generateTable.push(<tr>{row}</tr>);
+		}
+
 		return (
 			<table>
-				<tr />
+				<tbody>{generateTable}</tbody>
 			</table>
 		);
 	}
