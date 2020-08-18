@@ -32,7 +32,7 @@ class Board extends Component {
 	static defaultProps = {
 		nrows: 5,
 		ncols: 5,
-		chanceLightStartsOn: 0.25
+		chanceLightStartsOn: 1
 	};
 	constructor(props) {
 		super(props);
@@ -94,7 +94,13 @@ class Board extends Component {
 		// win when every cell is turned off
 		// TODO: determine is the game has been won
 
-		this.setState({ board });
+		let hasWon = false;
+
+		if (board.every((row) => row.every((e) => !e))) {
+			hasWon = true;
+		}
+
+		this.setState({ board, hasWon });
 	}
 
 	/** Render game board or winning message. */
@@ -123,9 +129,16 @@ class Board extends Component {
 		}
 
 		return (
-			<table className="Board">
-				<tbody>{generateTable}</tbody>
-			</table>
+			<div>
+				<h1>Lights Out</h1>
+				{this.state.hasWon ? (
+					'You Win!'
+				) : (
+					<table className="Board">
+						<tbody>{generateTable}</tbody>
+					</table>
+				)}
+			</div>
 		);
 	}
 }
