@@ -62,26 +62,40 @@ class Board extends Component {
 
 	/** handle changing a cell: update board & determine if winner */
 
-	// flipCellsAround(coord) {
-	// 	let { ncols, nrows } = this.props;
-	// 	let board = this.state.board;
-	// 	let [ y, x ] = coord.split('-').map(Number);
+	flipCellsAround(coord) {
+		let { ncols, nrows } = this.props;
+		let board = this.state.board;
+		let [ y, x ] = coord.split('-').map(Number);
 
-	// 	function flipCell(y, x) {
-	// 		// if this coord is actually on board, flip it
+		function flipCell(y, x) {
+			// if this coord is actually on board, flip it
 
-	// 		if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-	// 			board[y][x] = !board[y][x];
-	// 		}
-	// 	}
+			if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+				board[y][x] = !board[y][x];
+			}
+		}
 
-	// 	// TODO: flip this cell and the cells around it
+		flipCell(y, x);
 
-	// 	// win when every cell is turned off
-	// 	// TODO: determine is the game has been won
+		// TODO: flip this cell and the cells around it
 
-	// 	this.setState({ board, hasWon });
-	// }
+		//flip north cell
+		flipCell(y - 1, x);
+
+		//flip south cell
+		flipCell(y + 1, x);
+
+		//flip west cell
+		flipCell(y, x - 1);
+
+		//flip east cell
+		flipCell(y, x + 1);
+
+		// win when every cell is turned off
+		// TODO: determine is the game has been won
+
+		this.setState({ board });
+	}
 
 	/** Render game board or winning message. */
 
@@ -97,7 +111,13 @@ class Board extends Component {
 
 			for (let x = 0; x < this.props.ncols; x++) {
 				let coord = `${y}-${x}`;
-				row.push(<Cell key={coord} isLit={this.state.board[y][x]} />);
+				row.push(
+					<Cell
+						key={coord}
+						isLit={this.state.board[y][x]}
+						flipCellsAroundMe={() => this.flipCellsAround(coord)}
+					/>
+				);
 			}
 			generateTable.push(<tr key={y}>{row}</tr>);
 		}
