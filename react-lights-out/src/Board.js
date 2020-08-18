@@ -96,13 +96,14 @@ class Board extends Component {
 			let row = [];
 
 			for (let x = 0; x < this.props.ncols; x++) {
-				row.push(<Cell isLit={this.state.board[y][x]} />);
+				let coord = `${y}-${x}`;
+				row.push(<Cell key={coord} isLit={this.state.board[y][x]} />);
 			}
-			generateTable.push(<tr>{row}</tr>);
+			generateTable.push(<tr key={y}>{row}</tr>);
 		}
 
 		return (
-			<table>
+			<table className="Board">
 				<tbody>{generateTable}</tbody>
 			</table>
 		);
