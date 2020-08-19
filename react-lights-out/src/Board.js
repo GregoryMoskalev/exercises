@@ -107,7 +107,14 @@ class Board extends Component {
 
 	render() {
 		if (this.state.hasWon) {
-			return <p>You Win!</p>;
+			return (
+				<div className="Board-title">
+					<div className="winner">
+						<div className="neon-orange">You</div>
+						<div className="neon-blue">Win!</div>
+					</div>
+				</div>
+			);
 		}
 		// if the game is won, just show a winning msg & render nothing else
 		// TODO
@@ -132,9 +139,26 @@ class Board extends Component {
 		}
 
 		return (
-			<table className="Board">
-				<tbody>{generateTable}</tbody>
-			</table>
+			<div>
+				{this.state.hasWon ? (
+					<div className="Board-title">
+						<div className="winner">
+							<span className="neon-orange">You</span>
+							<span className="neon-blue">Win!</span>
+						</div>
+					</div>
+				) : (
+					<div>
+						<div className="Board-title">
+							<div className="neon-orange">Lights</div>
+							<div className="neon-blue">Out</div>
+						</div>
+						<table className="Board">
+							<tbody>{generateTable}</tbody>
+						</table>
+					</div>
+				)}
+			</div>
 		);
 	}
 }
