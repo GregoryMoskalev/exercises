@@ -27,8 +27,8 @@ class Die extends Component {
   render() {
     const { numberWords, val, disabled, locked, rolling } = this.props;
     let classes = 'Die ';
-    if (locked) classes += 'Die-locked';
-    if (rolling) classes += 'Die-rolling';
+    if (locked) classes += 'Die-locked ';
+    if (rolling && !locked) classes += 'Die-rolling';
     return (
       <FontAwesomeIcon
         icon={numberWords[val - 1]}
