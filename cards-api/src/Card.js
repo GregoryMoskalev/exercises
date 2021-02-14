@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
+import './Card.css';
 
 class Card extends Component {
+  constructor(props) {
+    super(props);
+    const angle = Math.random() * 90 - 45;
+    const xPos = Math.random() * 40 - 20;
+    const YPos = Math.random() * 40 - 20;
+    this._transform = `translate(${xPos}px, ${YPos}px) rotate(${angle}deg)`;
+  }
   render() {
-    return <img className="Card" src={this.props.image} alt={this.props.name} />;
+    return (
+      <img
+        style={{ transform: this._transform }}
+        className="Card"
+        src={this.props.image}
+        alt={this.props.name}
+      />
+    );
   }
 }
 
