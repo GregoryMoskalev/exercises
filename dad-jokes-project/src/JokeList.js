@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Joke from './Joke';
 import axios from 'axios';
 import uuid from 'uuid/dist/v4';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLaugh } from '@fortawesome/free-regular-svg-icons';
 import './JokeList.css';
 
 class JokeList extends Component {
@@ -10,7 +12,10 @@ class JokeList extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = { jokes: JSON.parse(window.localStorage.getItem('jokes') || '[]') };
+    this.state = {
+      jokes: JSON.parse(window.localStorage.getItem('jokes') || '[]'),
+      loading: false,
+    };
     this.handleClick = this.handleClick.bind(this);
   }
   async getJokes() {
@@ -21,9 +26,9 @@ class JokeList extends Component {
       });
       jokes.push({ id: uuid(), text: res.data.joke, votes: 0 });
     }
-    this.setState({ jokes: jokes });
     this.setState(
       (st) => ({
+        loading: false,
         jokes: [...st.jokes, ...jokes],
       }),
       () => {
@@ -34,7 +39,7 @@ class JokeList extends Component {
   }
   componentDidMount() {
     if (this.state.jokes.length === 0) {
-      this.getJokes();
+      this.setState({ loading: true }, this.getJokes);
     }
   }
   handleVote(id, delta) {
@@ -50,9 +55,17 @@ class JokeList extends Component {
     );
   }
   handleClick() {
-    this.getJokes();
+    this.setState({ loading: true }, this.getJokes);
   }
   render() {
+    if (this.state.loading) {
+      return (
+        <div className="JokeList-spinner">
+          <FontAwesomeIcon icon={faLaugh} size="8x" className="fa-spin" />
+          <h1 className="JokeList-title">Loading...</h1>
+        </div>
+      );
+    }
     return (
       <div className="JokeList">
         <div className="JokeList-sidebar">

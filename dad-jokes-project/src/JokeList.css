@@ -39,3 +39,7 @@
   width: 70%;
   overflow-y: scroll;
 }
+.JokeList-spinner {
+  color: white;
+  text-align: center;
+}
