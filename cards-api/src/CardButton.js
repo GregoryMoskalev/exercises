@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './CardButton.css';
 
 class CardButton extends Component {
   constructor(props) {
@@ -10,7 +11,11 @@ class CardButton extends Component {
   }
 
   render() {
-    return <button onClick={this.handleClick}>Get Card!</button>;
+    return (
+      <button className="Deck-btn" onClick={this.handleClick}>
+        Get Card!
+      </button>
+    );
   }
 }
 export default CardButton;
